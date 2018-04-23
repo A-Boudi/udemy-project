@@ -10,12 +10,14 @@ export class RecipeService {
   selectedRecipe = new EventEmitter<Recipe>();
   private recipes: Recipe[] = [
     new Recipe(
+      1,
       "Recipe 1",
       "Descriptoin of the recipe.",
       "https://assets.servedby-buysellads.com/p/manage/asset/id/32053", 
       [new Ingredient("potato", 2), new Ingredient("sipiuli", 1)]
     ),
     new Recipe(
+      2,
       "Recipe 2",
       "Descriptoin of the recipe2.",
       "https://assets.servedby-buysellads.com/p/manage/asset/id/32053",
@@ -31,6 +33,10 @@ export class RecipeService {
 
   addIngredientsToShoppingList(ingredients: Ingredient[]) {
     this.slService.addIngredients(ingredients);
+  }
+
+  getRecipeById(id: number) {
+    return this.recipes.find(i => i.id == id);
   }
 
 }

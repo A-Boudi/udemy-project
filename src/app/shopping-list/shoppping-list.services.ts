@@ -31,7 +31,7 @@ export class ShoppingListService {
     if (ingIndex != -1) {
       this.ingredients[ingIndex].amount += ingredient.amount;
     } else {
-      this.ingredients.push(ingredient);
+      this.ingredients.push(new Ingredient(ingredient.name, ingredient.amount));
     }
   }
 

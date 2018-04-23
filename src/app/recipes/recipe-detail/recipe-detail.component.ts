@@ -1,4 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Subscription } from 'rxjs/Subscription';
+
 import { Recipe } from '../recipe.model';
 import { RecipeService } from '../recipe.service';
 
@@ -9,12 +12,33 @@ import { RecipeService } from '../recipe.service';
   styleUrls: ['./recipe-detail.component.css']
 })
 export class RecipeDetailComponent {
-  @Input() recipe:Recipe;
+  recipe:Recipe;
+  paramsSubscription: Subscription;
 
-  constructor(private recipeService: RecipeService) { }
+  constructor(private recipeService: RecipeService,
+              private router: Router,
+              private route: ActivatedRoute) { }
+
+  ngOnInit() {
+    this.paramsSubscription = this.route.params
+    .subscribe(
+      (params: Params) => {
+        const recipe = this.recipeService.getRecipeById(+params['id']);
+        if (recipe) {
+          this.recipe = recipe;
+        } else {
+          this.router.navigate(['/recipe']);
+        }
+      }
+    );
+  }
 
   addToShoppingList() {
     this.recipeService.addIngredientsToShoppingList(this.recipe.ingredients);
+  }
+
+  onEditRecipe() {
+    this.router.navigate(['edit'], {relativeTo: this.route});
   }
 
 }

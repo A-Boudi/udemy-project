@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, Input } from '@angular/core';
+import { Component } from '@angular/core';
 
 
 @Component({
@@ -7,15 +7,5 @@ import { Component, Output, EventEmitter, Input } from '@angular/core';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
-  @Output() onSectionChange = new EventEmitter<string>();
-  @Input() activeSection: string;
-
-  constructor() { }
-
-  onMenuChange(option: string) {
-    //this.activeSection = 1;
-    this.onSectionChange.emit(option);
-    console.log(this.activeSection);
-  }
 
 }
