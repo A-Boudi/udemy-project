@@ -12,7 +12,8 @@ import { RecipeService } from '../recipe.service';
   styleUrls: ['./recipe-detail.component.css']
 })
 export class RecipeDetailComponent {
-  recipe:Recipe;
+  recipe: Recipe;
+  id: number;
   paramsSubscription: Subscription;
 
   constructor(private recipeService: RecipeService,
@@ -23,7 +24,8 @@ export class RecipeDetailComponent {
     this.paramsSubscription = this.route.params
     .subscribe(
       (params: Params) => {
-        const recipe = this.recipeService.getRecipeById(+params['id']);
+        this.id = +params['id']
+        const recipe = this.recipeService.getRecipe(this.id);
         if (recipe) {
           this.recipe = recipe;
         } else {
@@ -39,6 +41,11 @@ export class RecipeDetailComponent {
 
   onEditRecipe() {
     this.router.navigate(['edit'], {relativeTo: this.route});
+  }
+
+  onDeleteRecipe() {
+    this.recipeService.deleteRecipe(this.id);
+    this.router.navigate(['../'], { relativeTo: this.route })
   }
 
 }
