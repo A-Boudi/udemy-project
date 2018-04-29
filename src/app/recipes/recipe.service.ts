@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 
 import { Recipe } from "./recipe.model";
 import { Ingredient } from "../shared/Ingredient.model";
-import { ShoppingListService } from "../shopping-list/shoppping-list.services";
+import { ShoppingListService } from "../shopping-list/shopping-list.services";
 import { Subject } from "rxjs/Subject";
 
 

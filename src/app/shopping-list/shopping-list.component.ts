@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Ingredient } from '../shared/Ingredient.model';
-import { ShoppingListService } from './shoppping-list.services';
+import { ShoppingListService } from './shopping-list.services';
 import { Subscription } from 'rxjs/Subscription';
 
 
