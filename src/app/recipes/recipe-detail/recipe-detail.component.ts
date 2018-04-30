@@ -13,14 +13,14 @@ import { AuthService } from '../../auth/auth.service';
   styleUrls: ['./recipe-detail.component.css']
 })
 export class RecipeDetailComponent {
-  recipe: Recipe;
+  public recipe: Recipe;
   id: number;
   paramsSubscription: Subscription;
 
   constructor(private recipeService: RecipeService,
               private router: Router,
               private route: ActivatedRoute,
-              private authService: AuthService) { }
+              public authService: AuthService) { }
 
   ngOnInit() {
     this.paramsSubscription = this.route.params
@@ -48,6 +48,10 @@ export class RecipeDetailComponent {
   onDeleteRecipe() {
     this.recipeService.deleteRecipe(this.id);
     this.router.navigate(['../'], { relativeTo: this.route })
+  }
+
+  isAuthenticated() {
+    return this.authService.isAuthenticated();
   }
 
 }
