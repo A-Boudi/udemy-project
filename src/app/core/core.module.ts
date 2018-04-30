@@ -1,0 +1,40 @@
+import { NgModule } from "@angular/core";
+
+import { HeaderComponent } from "./header/header.component";
+import { HomeComponent } from "./home/home.component";
+import { ShoppingListService } from "../shopping-list/shopping-list.services";
+import { RecipeService } from "../recipes/recipe.service";
+import { DataStorageService } from "../shared/data-storage.service";
+import { AuthService } from "../auth/auth.service";
+import { AuthGard } from "../auth/auth-gard.service";
+import { SharedModule } from "../shared/shared.module";
+import { AppRoutingModule } from "../app-routing.module";
+import { AuthModule } from "../auth/auth.module";
+import { CommonModule } from "@angular/common";
+
+
+@NgModule({
+  declarations: [
+    HeaderComponent,
+    HomeComponent,
+  ],
+  imports: [
+    CommonModule,
+    SharedModule,
+    AppRoutingModule,
+  ],
+  exports: [
+    AppRoutingModule,
+    HeaderComponent
+  ],
+  providers: [
+    ShoppingListService,
+    RecipeService,
+    DataStorageService,
+    AuthService,
+    AuthGard
+  ],
+})
+export class CoreModule {
+
+}
