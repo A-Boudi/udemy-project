@@ -4,7 +4,6 @@ import { HTTP_INTERCEPTORS } from "@angular/common/http";
 
 import { HeaderComponent } from "./header/header.component";
 import { HomeComponent } from "./home/home.component";
-import { ShoppingListService } from "../shopping-list/shopping-list.services";
 import { RecipeService } from "../recipes/recipe.service";
 import { DataStorageService } from "../shared/data-storage.service";
 import { AuthService } from "../auth/auth.service";
@@ -30,7 +29,6 @@ import { AuthInterceptor } from "../shared/auth.interceptor";
     HeaderComponent
   ],
   providers: [
-    ShoppingListService,
     RecipeService,
     DataStorageService,
     AuthService,
