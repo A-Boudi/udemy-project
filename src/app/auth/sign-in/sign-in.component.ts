@@ -1,6 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm, EmailValidator } from '@angular/forms';
-import { AuthService } from '../auth.service';
+import { Store } from '@ngrx/store';
+
+import * as fromApp from '../../store/app.reducers';
+import * as AuthActions from '../store/auth.actions';
 
 @Component({
   selector: 'app-sign-in',
@@ -10,14 +13,14 @@ import { AuthService } from '../auth.service';
 export class SignInComponent implements OnInit {
   @ViewChild('signinForm') singinForm: NgForm;
 
-  constructor(private authService: AuthService) { }
+  constructor(private store: Store<fromApp.AppState>) { }
 
   ngOnInit() {
   }
 
   onSignin() {
     const value = this.singinForm.value;
-    this.authService.loginUser(value.email, value.password);
+    this.store.dispatch(new AuthActions.DoSignin({email: value.email, password: value.password}));
   }
 
 }

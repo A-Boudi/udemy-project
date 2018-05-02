@@ -6,7 +6,6 @@ import { HeaderComponent } from "./header/header.component";
 import { HomeComponent } from "./home/home.component";
 import { RecipeService } from "../recipes/recipe.service";
 import { DataStorageService } from "../shared/data-storage.service";
-import { AuthService } from "../auth/auth.service";
 import { AuthGard } from "../auth/auth-gard.service";
 import { SharedModule } from "../shared/shared.module";
 import { AppRoutingModule } from "../app-routing.module";
@@ -31,7 +30,6 @@ import { AuthInterceptor } from "../shared/auth.interceptor";
   providers: [
     RecipeService,
     DataStorageService,
-    AuthService,
     AuthGard,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
