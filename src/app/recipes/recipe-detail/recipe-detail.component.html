@@ -14,7 +14,7 @@
 
 <div class="row">
   <div class="col-md-12">
-    <div class="btn-group" appDropdown *ngIf="isAuthenticated()">
+    <div class="btn-group" appDropdown *ngIf="(authState | async).authenticated">
       <button class="btn btn-secondary dropdown-toggle" type="button">
         Manage Recipe
       </button>
