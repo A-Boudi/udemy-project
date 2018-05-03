@@ -1,5 +1,5 @@
-import { Component, ViewChild, ElementRef, OnInit, Input, OnDestroy } from '@angular/core';
-import { NgForm } from "@angular/forms"
+import { Component, ViewChild, OnInit, OnDestroy } from '@angular/core';
+import { NgForm } from '@angular/forms'
 import { Store } from '@ngrx/store';
 
 import { Ingredient } from '../../shared/Ingredient.model';
@@ -28,8 +28,8 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
           this.editMode = true;
           this.editedItem = data.editedIngredient;
           this.slEditForm.setValue({
-            "name": this.editedItem.name,
-            "amount": this.editedItem.amount
+            'name': this.editedItem.name,
+            'amount': this.editedItem.amount
           })
         } else {
           this.editMode = false;

@@ -1,6 +1,6 @@
-import { NgModule } from "@angular/core";
+import { NgModule } from '@angular/core';
 
-import { DropdownDirective } from "./dropdown.directive";
+import { DropdownDirective } from './dropdown.directive';
 
 
 @NgModule({

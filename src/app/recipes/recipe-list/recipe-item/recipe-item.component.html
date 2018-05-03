@@ -1,9 +1,12 @@
 <a [routerLink]="[recipeId]" class="list-group-item" routerLinkActive="active">
   <div class="float-left">
-    <h4>{{ recipe.name }}</h4>
-    <p>{{ recipe.description | slice:0:30 }} ...</p>
+    <h4>{{ (recipeState | async).recipes[recipeId].name }}</h4>
+    <p>{{ (recipeState | async).recipes[recipeId].description | slice:0:30 }} ...</p>
   </div>
   <span class="float-right">
-    <img [src]="recipe.imagePath" alt="{{ recipe.name }}" class="img-fluid" style="max-height: 50px;">
+    <img [src]="(recipeState | async).recipes[recipeId].imagePath" 
+         alt="{{ (recipeState | async).recipes[recipeId].name }}"
+         class="img-fluid"
+         style="max-height: 50px;">
   </span>
 </a>

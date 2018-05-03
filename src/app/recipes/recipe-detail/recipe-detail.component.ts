@@ -4,11 +4,10 @@ import { Subscription } from 'rxjs/Subscription';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
-import { Recipe } from '../recipe.model';
-import { RecipeService } from '../recipe.service';
 import * as slActions from '../../shopping-list/store/shopping-list.actions';
-import * as fromApp from '../../store/app.reducers';
 import * as fromAuth from '../../auth/store/auth.reducers';
+import * as fromRecipe from '../store/recipe.reducers';
+import * as RecipesActions from '../store/recipe.actions';
 
 
 @Component({
@@ -17,34 +16,34 @@ import * as fromAuth from '../../auth/store/auth.reducers';
   styleUrls: ['./recipe-detail.component.css']
 })
 export class RecipeDetailComponent {
-  public recipe: Recipe;
+  recipeState: Observable<fromRecipe.State>;
   id: number;
   paramsSubscription: Subscription;
   authState : Observable<fromAuth.State>;
 
-  constructor(private recipeService: RecipeService,
-              private router: Router,
+  constructor(private router: Router,
               private route: ActivatedRoute,
-              private store: Store<fromApp.AppState>) { }
+              private store: Store<fromRecipe.RecipesState>) { }
 
   ngOnInit() {
     this.paramsSubscription = this.route.params
       .subscribe(
         (params: Params) => {
           this.id = +params['id']
-          const recipe = this.recipeService.getRecipe(this.id);
-          if (recipe) {
-            this.recipe = recipe;
-          } else {
-            this.router.navigate(['/recipe']);
-          }
+          this.recipeState = this.store.select('recipes');
         }
       );
     this.authState = this.store.select('auth');
   }
 
   addToShoppingList() {
-    this.store.dispatch(new slActions.AddIngredients(this.recipe.ingredients));
+    this.store.select('recipes').take(1).subscribe(
+      (recipeState: fromRecipe.State) => {
+        this.store.dispatch(new slActions.AddIngredients(
+          recipeState.recipes[this.id].ingredients
+        ));
+      }
+    );
   }
 
   onEditRecipe() {
@@ -52,7 +51,7 @@ export class RecipeDetailComponent {
   }
 
   onDeleteRecipe() {
-    this.recipeService.deleteRecipe(this.id);
+    this.store.dispatch(new RecipesActions.DeleteRecipe(this.id));
     this.router.navigate(['../'], { relativeTo: this.route })
   }
 

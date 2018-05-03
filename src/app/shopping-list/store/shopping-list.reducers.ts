@@ -1,6 +1,3 @@
-
-import { Action } from '@ngrx/store'
-
 import * as slActions from './shopping-list.actions';
 import { Ingredient } from '../../shared/Ingredient.model';
 
@@ -13,7 +10,7 @@ export interface State {
 
 
 const initialState : State = {
-  ingredients: [new Ingredient("apple" , 8)],
+  ingredients: [new Ingredient('apple' , 8)],
   editedIngredient: null,
   editedIngredientIndex: -1
 };
