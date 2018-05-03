@@ -17,17 +17,37 @@ const initialState: State = {
 
 export function shoppingListReducer(state = initialState, action: slActions.ShoppingListActions) {
   switch (action.type) {
-    case slActions.ADD_INGREDIENT:
+    case slActions.ADD_INGREDIENT: {
+      const ingredients = state.ingredients;
+      const newIng = action.payload;
+      const index = ingredients.findIndex(i => i.name === newIng.name);
+      if (index > -1) {
+        ingredients[index].amount += newIng.amount;
+      } else {
+        ingredients.push(newIng);
+      }
       return {
         ...state,
-        ingredients: [...state.ingredients, action.payload]
+        ingredients: [...ingredients]
       };
-    case slActions.ADD_INGREDIENTS:
+    }
+    case slActions.ADD_INGREDIENTS: {
+      const ings = state.ingredients;
+      const payload = action.payload;
+      payload.forEach(ing => {
+        const index = ings.findIndex(i => i.name === ing.name);
+        if (index > -1) {
+          ings[index].amount += ing.amount;
+        } else {
+          ings.push(new Ingredient(ing.name, ing.amount));
+        }
+      });
       return {
         ...state,
-        ingredients: [...state.ingredients, ...action.payload]
+        ingredients: [...ings]
       };
-    case slActions.UPDATE_INGREDIENT:
+    }
+    case slActions.UPDATE_INGREDIENT: {
       state.ingredients[state.editedIngredientIndex] = action.payload;
       return {
         ...state,
@@ -35,7 +55,8 @@ export function shoppingListReducer(state = initialState, action: slActions.Shop
         editedIngredient: null,
         editedIngredientIndex: -1
       };
-    case slActions.DELETE_INGREDIENT:
+    }
+    case slActions.DELETE_INGREDIENT: {
       state.ingredients.splice(state.editedIngredientIndex, 1);
       return {
         ...state,
@@ -43,19 +64,22 @@ export function shoppingListReducer(state = initialState, action: slActions.Shop
         editedIngredient: null,
         editedIngredientIndex: -1
       };
-    case slActions.START_EDIT:
+    }
+    case slActions.START_EDIT: {
       const editedIngredient = state.ingredients[action.payload];
       return {
         ...state,
         editedIngredient: editedIngredient,
         editedIngredientIndex: action.payload
       };
-    case slActions.STOP_EDIT:
+    }
+    case slActions.STOP_EDIT: {
       return {
         ...state,
         editedIngredient: null,
         editedIngredientIndex: -1
       };
+    }
     default:
       return state;
   }
