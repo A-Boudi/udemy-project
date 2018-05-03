@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { Store } from '@ngrx/store';
@@ -15,11 +15,11 @@ import * as RecipesActions from '../store/recipe.actions';
   templateUrl: './recipe-detail.component.html',
   styleUrls: ['./recipe-detail.component.css']
 })
-export class RecipeDetailComponent {
+export class RecipeDetailComponent implements OnInit {
   recipeState: Observable<fromRecipe.State>;
   id: number;
   paramsSubscription: Subscription;
-  authState : Observable<fromAuth.State>;
+  authState: Observable<fromAuth.State>;
 
   constructor(private router: Router,
               private route: ActivatedRoute,
@@ -29,7 +29,7 @@ export class RecipeDetailComponent {
     this.paramsSubscription = this.route.params
       .subscribe(
         (params: Params) => {
-          this.id = +params['id']
+          this.id = +params['id'];
           this.recipeState = this.store.select('recipes');
         }
       );
@@ -52,7 +52,7 @@ export class RecipeDetailComponent {
 
   onDeleteRecipe() {
     this.store.dispatch(new RecipesActions.DeleteRecipe(this.id));
-    this.router.navigate(['../'], { relativeTo: this.route })
+    this.router.navigate(['../'], { relativeTo: this.route });
   }
 
 }

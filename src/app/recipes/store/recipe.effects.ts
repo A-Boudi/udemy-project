@@ -1,4 +1,4 @@
-import { Effect, Actions } from '@ngrx/effects'
+import { Effect, Actions } from '@ngrx/effects';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { HttpClient } from '@angular/common/http';
@@ -16,12 +16,12 @@ export class RecipeEffects {
   fetchRecipes = this.actions$.ofType(RecipeActions.FETCH_RECIPES)
     .switchMap(
       (action: RecipeActions.FetchRecipes) => {
-        return this.httpClient.get<Recipe[]>("https://ng-dummy-prj.firebaseio.com/recipes.json");
+        return this.httpClient.get<Recipe[]>('https://ng-dummy-prj.firebaseio.com/recipes.json');
       }
     )
     .map(
       (recipes: Recipe[]) => {
-        for (let recipe of recipes) {
+        for (const recipe of recipes) {
           if (!recipe['ingredients']) {
             recipe['ingredients'] = [];
           }
@@ -29,7 +29,7 @@ export class RecipeEffects {
         return {
           type: RecipeActions.SET_RECIPES,
           payload: recipes
-        }
+        };
       }
     );
 
@@ -38,12 +38,12 @@ export class RecipeEffects {
     .withLatestFrom(this.store.select('recipes'))
     .switchMap(
       ([action, state]) => {
-        return this.httpClient.put("https://ng-dummy-prj.firebaseio.com/recipes.json", state.recipes);
+        return this.httpClient.put('https://ng-dummy-prj.firebaseio.com/recipes.json', state.recipes);
       }
     )
     .map(
       (recipes: Recipe[]) => {
-        for (let recipe of recipes) {
+        for (const recipe of recipes) {
           if (!recipe['ingredients']) {
             recipe['ingredients'] = [];
           }
@@ -51,7 +51,7 @@ export class RecipeEffects {
         return {
           type: RecipeActions.SET_RECIPES,
           payload: recipes
-        }
+        };
       }
     );
 

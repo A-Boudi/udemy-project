@@ -14,7 +14,7 @@ import * as fromRecipe from '../store/recipe.reducers';
 })
 export class RecipeListComponent implements OnInit {
   recipeState: Observable<fromRecipe.State>;
-  authState : Observable<fromAuth.State>;
+  authState: Observable<fromAuth.State>;
 
   constructor(private router: Router,
               private route: ActivatedRoute,

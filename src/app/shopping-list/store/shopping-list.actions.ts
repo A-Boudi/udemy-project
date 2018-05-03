@@ -1,4 +1,4 @@
-import { Action } from '@ngrx/store'
+import { Action } from '@ngrx/store';
 
 import { Ingredient } from '../../shared/Ingredient.model';
 
@@ -47,10 +47,10 @@ export class StopEdit implements Action {
   constructor() {}
 }
 
-export type ShoppingListActions = 
+export type ShoppingListActions =
   AddIngredient |
   AddIngredients |
   UpdateIngredient |
   DeleteIngredient |
-  StartEdit | 
+  StartEdit |
   StopEdit;

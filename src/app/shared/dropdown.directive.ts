@@ -1,25 +1,25 @@
-import { Directive, HostBinding, HostListener, ElementRef } from '@angular/core'
+import { Directive, HostBinding, HostListener, ElementRef } from '@angular/core';
 
 
 @Directive({
-  selector: "[appDropdown]"
+  selector: '[appDropdown]'
 })
 export class DropdownDirective {
-  private isShown: boolean = false;
+  private isShown = false;
 
   constructor(private _el: ElementRef) {}
 
   @HostBinding('class.show') get showed () {
     return this.isShown;
   }
- 
+
   @HostListener('click') toggle() {
     if (this.isShown) {
       this.isShown = false;
-      this._el.nativeElement.querySelector('.dropdown-menu').classList.remove('show') 
+      this._el.nativeElement.querySelector('.dropdown-menu').classList.remove('show');
     } else {
       this.isShown = true;
-      this._el.nativeElement.querySelector('.dropdown-menu').classList.add('show') 
+      this._el.nativeElement.querySelector('.dropdown-menu').classList.add('show');
     }
   }
 

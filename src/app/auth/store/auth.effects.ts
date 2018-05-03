@@ -20,13 +20,13 @@ export class AuthEffects {
         return action.payload;
       }
     )
-    .switchMap( 
+    .switchMap(
       (authData: {email: string, password: string}) => {
         return fromPromise(firebase.app().auth().createUserWithEmailAndPassword(authData.email, authData.password));
       }
     )
     .switchMap(
-      () => { return fromPromise(firebase.auth().currentUser.getIdToken()); }
+      () => fromPromise(firebase.auth().currentUser.getIdToken())
     )
     .mergeMap(
       (token: string) => {
@@ -39,7 +39,7 @@ export class AuthEffects {
             type: AuthActions.SET_TOKEN,
             payload: token
           }
-        ]
+        ];
       }
     );
 
@@ -50,13 +50,13 @@ export class AuthEffects {
         return action.payload;
       }
     )
-    .switchMap( 
+    .switchMap(
       (authData: {email: string, password: string}) => {
         return fromPromise(firebase.app().auth().signInWithEmailAndPassword(authData.email, authData.password));
       }
     )
     .switchMap(
-      () => { return fromPromise(firebase.auth().currentUser.getIdToken()); }
+      () => fromPromise(firebase.auth().currentUser.getIdToken())
     )
     .mergeMap(
       (token: string) => {
@@ -69,13 +69,13 @@ export class AuthEffects {
             type: AuthActions.SET_TOKEN,
             payload: token
           }
-        ]
+        ];
       }
     );
 
   @Effect({dispatch: false})
   authLogout = this.actions$.ofType(AuthActions.LOGOUT)
-    .do(() => this.router.navigate(['/']))
+    .do(() => this.router.navigate(['/']));
 
   constructor(private actions$: Actions,
               private router: Router) {}

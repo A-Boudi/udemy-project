@@ -24,5 +24,4 @@ export class ShoppingListComponent implements OnInit {
   ingredientSelected(index: number) {
     this.store.dispatch(new slActions.StartEdit(index));
   }
-
 }

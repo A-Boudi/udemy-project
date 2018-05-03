@@ -3,7 +3,6 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
-import { validateConfig } from '@angular/router/src/config';
 import * as fromRecipe from '../store/recipe.reducers';
 import * as RecipesActions from '../store/recipe.actions';
 
@@ -13,14 +12,13 @@ import * as RecipesActions from '../store/recipe.actions';
   styleUrls: ['./recipe-edit.component.css']
 })
 export class RecipeEditComponent implements OnInit {
-  recipesState
   reForm: FormGroup;
   id: number;
   editMode = false;
 
   constructor(private store: Store<fromRecipe.RecipesState>,
-    private route: ActivatedRoute,
-    private router: Router) { }
+              private route: ActivatedRoute,
+              private router: Router) { }
 
   ngOnInit() {
     this.route.params.subscribe(
@@ -36,7 +34,7 @@ export class RecipeEditComponent implements OnInit {
     let recipName = '';
     let imagePath = '';
     let description = '';
-    let ingredients = new FormArray([]);
+    const ingredients = new FormArray([]);
 
     if (this.editMode) {
       this.store.select('recipes').take(1).subscribe(
@@ -46,7 +44,7 @@ export class RecipeEditComponent implements OnInit {
           imagePath = recipe.imagePath;
           description = recipe.description;
           if (recipe['ingredients']) {
-            for (let ingredient of recipe.ingredients) {
+            for (const ingredient of recipe.ingredients) {
               ingredients.push(new FormGroup({
                 'name': new FormControl(ingredient.name, Validators.required),
                 'amount': new FormControl(ingredient.amount, [
@@ -73,7 +71,7 @@ export class RecipeEditComponent implements OnInit {
         Validators.required,
         Validators.pattern(/^[1-9]+[0-9]*$/)
       ])
-    }))
+    }));
   }
 
   deleteIngredient(index: number) {

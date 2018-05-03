@@ -25,7 +25,7 @@ import { RecipeEffects } from './store/recipe.effects';
     RecipeDetailComponent,
     RecipeEditComponent
   ],
-  imports:[
+  imports: [
     CommonModule,
     ReactiveFormsModule,
     RecipesRoutingModule,

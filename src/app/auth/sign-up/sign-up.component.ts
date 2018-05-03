@@ -19,5 +19,5 @@ export class SignUpComponent {
     const value = this.singupForm.value;
     this.store.dispatch(new AuthActions.DoSignup({email: value.email, password: value.password}));
   }
-  
+
 }

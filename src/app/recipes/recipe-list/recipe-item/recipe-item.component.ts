@@ -12,7 +12,7 @@ import * as fromRecipe from '../../store/recipe.reducers';
 })
 export class RecipeItemComponent implements OnInit {
   @Input() recipeId: number;
-  recipeState: Observable<fromRecipe.State>; 
+  recipeState: Observable<fromRecipe.State>;
 
   constructor(private store: Store<fromRecipe.RecipesState>) { }
 

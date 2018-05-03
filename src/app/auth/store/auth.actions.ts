@@ -1,4 +1,4 @@
-import { Action } from '@ngrx/store'
+import { Action } from '@ngrx/store';
 
 export const DO_SINGUP = 'DO_SINGUP';
 export const SINGUP = 'SINGUP';
